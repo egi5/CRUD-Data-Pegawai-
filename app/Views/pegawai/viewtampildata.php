@@ -17,8 +17,8 @@
     <div class="card m-b-30">
         <div class="card-body">
             <p class="card-text">
-                <tabel class = "tabel tabel-sm tabel-striped" id= "datapegawai">
-                    <thread>
+                <table class = "tabel tabel-sm tabel-striped" id= "datapegawai">
+                    <thead>
                         <tr>
                             <th>No</th>
                             <th>ID Pegawai</th>
@@ -29,7 +29,7 @@
                             <th>Nomor Telepon</th>
                             <th>Opsi</th>
                         </tr>
-                    </thread>
+                    </thead>
 
                     <tbody>
                         <?php $nomor=0; foreach($tampildata as $row):
@@ -46,7 +46,7 @@
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
-                </tabel>
+                </table>
             </p>
         </div>
     </div>
