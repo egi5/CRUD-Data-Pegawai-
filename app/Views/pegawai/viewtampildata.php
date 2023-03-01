@@ -16,7 +16,7 @@
 <div class="col-sm-12">
     <div class="card m-b-30">
         <div class="card-body">
-            
+            <p class="card-text">
                 <tabel class = "tabel tabel-sm tabel-striped" id= "datapegawai">
                     <thread>
                         <tr>
@@ -47,7 +47,7 @@
                         <?php endforeach; ?>
                     </tbody>
                 </tabel>
-            
+            </p>
         </div>
     </div>
 </div>
