@@ -3,10 +3,10 @@
 
 <?= $this->section('isi') ?>
 
-<link href="<?= base_url() ?>/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-<link href="<?= base_url() ?>/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-<script src="<?= base_url() ?>/assets/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?= base_url() ?>/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<link href="<?= base_url() ?>public/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="<?= base_url() ?>public/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<script src="<?= base_url() ?>public/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?= base_url() ?>public/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
 <div class="col-sm-12">
     <div class="page-title-box">
         <h4 class="page-title">DATA PEGAWAI</h4>
@@ -16,39 +16,28 @@
 <div class="col-sm-12">
     <div class="card m-b-30">
         <div class="card-body">
-            <p class="card-text">
-                <table class = "tabel tabel-sm tabel-striped" id= "datapegawai">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>ID Pegawai</th>
-                            <th>Nama</th>
-                            <th>Jenis Kelamin</th>
-                            <th>Tanggal Lahir</th>
-                            <th>Alamat</th>
-                            <th>Nomor Telepon</th>
-                            <th>Opsi</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <?php $nomor=0; foreach($tampildata as $row):
-                            $nomor++;?>
-                            <tr>
-                                <td><?= $nomor ?></td>
-                                <td><?= $row['idpegawai'] ?></td>
-                                <td><?= $row['nama_pegawai'] ?></td>
-                                <td><?= $row['jenkel'] ?></td>
-                                <td><?= $row['tanggal_lahir'] ?></td>
-                                <td><?= $row['alamat_pegawai'] ?></td>
-                                <td><?= $row['telepon'] ?></td>
-                                <td></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+            <p class="card-text viewdata">
+                
             </p>
         </div>
     </div>
 </div>
+
+<script>
+    function datapegawai(){
+        $.ajax({
+            url: "<?= site_url('pegawai/ambildata')?>",
+            dataType: "json",
+            succes: function(response){
+                $('.viewdata').html(response.data);
+            },
+            error:function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.reponseText + "\n" + thrownError);
+            }
+        });
+    }
+    $(document).ready(function(){
+        datapegawai();
+    });
+</script>
 <?= $this->endSection('')?>
