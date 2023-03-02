@@ -55,23 +55,15 @@
 </div>
 
 <script>
-     $(document).ready(function(){
+
+    $(document).ready(function(){
         $('.formpegawai').submit(function(e){
             e.preventDefault();
-            
             $.ajax({
-                type:"post",
-                url:$(this).attr('action'),
+                type:"POST",
+                url: $(this).attr('action'),
                 data:$(this).serialize(),
-                dataType:"json",
-                beforeSend: function () {
-                    $('#btnsimpan').attr('disable','disabled');
-                    $('#btnsimpan').html('<i class="fa fa-spin faspinner"></i>');
-                },
-                complete: function(){
-                    $('#btnsimpan').removeAttr('disable');
-                    $('#btnsimpan').html('Simpan');
-                },  
+                dataType:"Json",  
                 success: function(response){
                     alert(response.sukses);
                 },
@@ -82,5 +74,5 @@
             });
             return false;
         });
-     });
+    });
 </script>

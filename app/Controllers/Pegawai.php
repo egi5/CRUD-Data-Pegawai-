@@ -39,24 +39,21 @@ class Pegawai extends BaseController
     }
 
     public function simpandata(){
-        if($this->request->isAJAX()){
-           $simpandata =[
-            'idpegawai'     =>$this->request->getVar('idpegawai'),
-            'nama_pegawai'  =>$this->request->getVar('namapegawai'),
-            'jenkel'     =>$this->request->getVar('jenkel'),
-            'tanggal_lahir'     =>$this->request->getVar('tgllahir'),
-            'alamat_pegawai'     =>$this->request->getVar('alamat'),
-            'telepon'     =>$this->request->getVar('telepon')
-           ];
+        $simpandata =[
+            'idpegawai' => $this->request->getVar('idpegawai'),
+            'nama_pegawai' => $this->request->getVar('namapegawai'),
+            'jenkel' => $this->request->getVar('jenkel'),
+            'tanggal_lahir' => $this->request->getVar('tgllahir'),
+            'alamat_pegawai' => $this->request->getVar('alamat'),
+            'telepon' => $this->request->getVar('telepon')
+        ];
 
-           $pegawai = new ModalPegawai;
+        $pegawai = new ModelPegawai;
 
-           $pegawai->insert($simpandata);
-           $msg = [
+        $pegawai->insert($simpandata);
+        $msg = [
                 'sukses' =>'Data pegawai berhasil disimpan'
            ];
-        }else{
-            exit('Maaf tidak dapat ditampilkan');
-        }
+        
     }
 }
