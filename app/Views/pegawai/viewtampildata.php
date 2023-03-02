@@ -42,7 +42,6 @@
 
     $(document).ready(function(){
         datapegawai();
-        //     $('#datapegawai').DataTable();
 
         $('.tambahpegawai').click(function(e){
             e.preventDefault();
