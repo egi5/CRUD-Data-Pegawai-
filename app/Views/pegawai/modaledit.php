@@ -1,17 +1,17 @@
 <!-- Modal -->
-<div class="modal fade" id="modaltambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modaledit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data Pegawai</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data Pegawai</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <?= form_open('pegawai/simpandata',['class' => 'formpegawai']) ?>
+            <?= form_open('pegawai/updatedata',['class' => 'formpegawai']) ?>
             <div class="modal-body">
                 <div class="mb-3">
                     <label for="" class="form-label">ID Pegawai</label>
-                    <input type="text" class="form-control" id="idpegawai" name="idpegawai">
+                    <input type="text" class="form-control" id="idpegawai" name="idpegawai" value="<?= $idpegawai ?>">
                 </div>
 
                 <div class="mb-3">

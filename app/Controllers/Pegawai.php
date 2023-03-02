@@ -53,7 +53,30 @@ class Pegawai extends BaseController
         $pegawai->insert($simpandata);
         $msg = [
                 'sukses' =>'Data pegawai berhasil disimpan'
-           ];
-        
+        ];
+        echo json_encode($msg);
+    }
+
+    public function formedit(){
+        if($this->request->isAJAX()){
+            $idpegawai = $this->request->getVar('idpegawai');
+            
+            $pegawai = new ModelPegawai;
+            $row = $pegawai->find($idpegawai);
+
+            $data = [
+                'idpegawai' => $row['idpegawai'],
+                'namapegawai' => $row['nama_pegawai'],
+                'jenkel' => $row['jenkel'],
+                'tgllahir' => $row['tanggal_lahir'],
+                'alamat' => $row['alamat'],
+                'telepon' => $row['telepon'],
+            ];
+
+            $msg = [
+                'sukses' => view('pegawai/modaledit', $data)
+            ];
+            echo json_encode($msg);
+        }
     }
 }
