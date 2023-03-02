@@ -9,6 +9,7 @@ class Pegawai extends BaseController
     public function index()
     {
         
+        
         return view("pegawai/viewtampildata");
         
     }
@@ -26,4 +27,16 @@ class Pegawai extends BaseController
             exit('Maaf tidak dapat ditampilkan');
         }
     }
+
+    public function formtambah(){
+        if($this->request->isAJAX()){
+            $msg = ['data' => view('pegawai/modaltambah')];
+
+            echo json_encode($msg);
+        }else{
+            exit('Maaf tidak dapat ditampilkan');
+        }
+    }
+
+    
 }

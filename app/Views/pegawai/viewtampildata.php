@@ -16,28 +16,49 @@
 <div class="col-sm-12">
     <div class="card m-b-30">
         <div class="card-body">
+            <div class="card-title">
+                <button type= "button" class="btn btn-primary btn-sm tambahpegawai">Tambah Pegawai</button>
+            </div>
             <p class="card-text viewdata">
-                
+
             </p>
         </div>
     </div>
 </div>
-
+<div class ="viewmodal" style="display:none;"></div>
 <script>
     function datapegawai(){
         $.ajax({
             url: "<?= site_url('pegawai/ambildata')?>",
             dataType: "json",
-            succes: function(response){
-                $('.viewdata').html(response.data);
+            success: function(response){
+                $('.viewdata').html(response.data);     
             },
             error:function(xhr, ajaxOptions, thrownError) {
                 alert(xhr.status + "\n" + xhr.reponseText + "\n" + thrownError);
             }
         });
     }
+
     $(document).ready(function(){
         datapegawai();
+        //     $('#datapegawai').DataTable();
+
+        $('.tambahpegawai').click(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: "<?= site_url('pegawai/formtambah')?>",
+                dataType: "json",
+                success: function(response){
+                    $('.viewmodal').html(response.data).show();
+
+                    $('#modaltambah').modal('show');
+                },
+                error:function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" + xhr.reponseText + "\n" + thrownError);
+                }
+            });
+        });
     });
 </script>
 <?= $this->endSection('')?>

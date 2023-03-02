@@ -13,7 +13,7 @@
         <div class="card-body">
             <h3 class="card-title font-20 mt-0">PEGAWAI</h3>
             <p class="card-text">CRUD Tabel Pegawai</p>
-            <a href="#" class="btn btn-primary">Tabel Pegawai</a>
+            <a href="<?= site_url('pegawai/index')?>" class="btn btn-primary">Tabel Pegawai</a>
         </div>
     </div>
 </div>
