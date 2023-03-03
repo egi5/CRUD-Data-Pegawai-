@@ -34,42 +34,12 @@
 <script>
 $(document).ready(function() {
     $('#datapegawai').DataTable();
-
-    $('.edit').click(function(){
-
-        var idpegawai = $(this).attr("idpegawai");
-        $.ajax({
-            url: '<?= site_url('pegawai/formedit') ?>',
-            method: 'post',
-            data: {idpegawai:idpegawai},
-            success:function(response){
-                $('.viewmodal').modal("show");
-                $('#modaledit').html(response.sukses);
-            }
-        });
-    });
-
-    // $('.hapus').click(function(){
-    //     var idpegawai = $(this).attr("idpegawai");
-    //     $.ajax({
-    //         url: '<?php echo base_url(); ?>/pegawai/delete',
-    //         method: 'post',
-    //         data: {
-    //             idpegawai:idpegawai
-    //         },
-    //         success:function(data){
-    //             $('.viewmodal').modal("show");
-    //             $('#modaledit').html(data).show();
-    //         }
-    //     });
-    // });
 });
 
 
 function edit(idpegawai) {
-
     $.ajax({
-        type:"POST",
+        type:"post",
         url: "<?= site_url('pegawai/formedit')?>",
         data:{
             idpegawai : idpegawai
