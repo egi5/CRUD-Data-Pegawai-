@@ -16,7 +16,7 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Nama Pegawai</label>
-                    <input type="text" class="form-control" id="namapegawai" name="namapegawai">
+                    <input type="text" class="form-control" id="namapegawai" name="namapegawai" value="<?= $nama_pegawai ?>>
                 </div>
 
                 <div class="mb-3">
@@ -56,26 +56,5 @@
 
 <script>
 
-    $(document).ready(function(){
-        $('.formpegawai').submit(function(e){
-            e.preventDefault();
-            $.ajax({
-                type:"POST",
-                url: $(this).attr('action'),
-                data:$(this).serialize(),
-                dataType:"Json",  
-                success: function(response){
-                    alert(response.sukses);
-
-                    $('#modaltamah').modal('hide');
-                    datapegawai();
-                },
-                error:function(xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status + "\n" + xhr.reponseText + "\n" + thrownError);
-                }
-
-            });
-            return false;
-        });
-    });
+    
 </script>

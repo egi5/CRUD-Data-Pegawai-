@@ -24,8 +24,8 @@
             <td><?= $row['alamat_pegawai'] ?></td>
             <td><?= $row['telepon'] ?></td>
             <td>
-                <button type = "button" class="btn btn-info btn-sm" onclick="edit<?= $row['idpegawai']?>">Update</button>
-                <button type = "button" class="btn btn-danger btn-sm" onclick="edit<?= $row['idpegawai']?>">Delete</button>
+                <a type = "button" class="btn btn-info btn-sm edit" onclick="edit('<?= $row['idpegawai'] ?>')">Update</a>
+                <a type = "button" class="btn btn-danger btn-sm" onclick="hapus('<?= $row['idpegawai'] ?>')">Delete</a>
             </td>
         </tr>
         <?php endforeach; ?>
@@ -34,24 +34,70 @@
 <script>
 $(document).ready(function() {
     $('#datapegawai').DataTable();
+
+    $('.edit').click(function(){
+
+        var idpegawai = $(this).attr("idpegawai");
+        $.ajax({
+            url: '<?= site_url('pegawai/formedit') ?>',
+            method: 'post',
+            data: {idpegawai:idpegawai},
+            success:function(response){
+                $('.viewmodal').modal("show");
+                $('#modaledit').html(response.sukses);
+            }
+        });
+    });
+
+    // $('.hapus').click(function(){
+    //     var idpegawai = $(this).attr("idpegawai");
+    //     $.ajax({
+    //         url: '<?php echo base_url(); ?>/pegawai/delete',
+    //         method: 'post',
+    //         data: {
+    //             idpegawai:idpegawai
+    //         },
+    //         success:function(data){
+    //             $('.viewmodal').modal("show");
+    //             $('#modaledit').html(data).show();
+    //         }
+    //     });
+    // });
 });
 
+
 function edit(idpegawai) {
+
     $.ajax({
         type:"POST",
-        url: <?= site_url('pegawai/formedit')?>,
+        url: "<?= site_url('pegawai/formedit')?>",
         data:{
-            idpegawai: idpegawai
+            idpegawai : idpegawai
         },
         dataType:"json",  
         success: function(response){
-            if(response.sukses){
-                $('.viewmodal').html(response.sukses).show();
-                $('#modaledit').modal('show');
-            }
+            $('#modaledit').modal('show');
+            $('.viewmodal').html(response.sukses).show();    
         },
         error:function(xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + "\n" + xhr.reponseText + "\n" + thrownError);
+            alert(xhr.status + "\n" + xhr.reponseText + "\n" + thrownError + "\n"+ idpegawai);
+        }
+    });
+}
+
+function hapus(idpegawai) {
+    $.ajax({
+        type: "post",
+        url :"<?= site_url('pegawai/hapus')?>",
+        data:{
+            idpegawai : idpegawai
+        },
+        dataType: "json",
+        success: function (response) {
+            datapegawai();
+        },
+        error:function(xhr, ajaxOptions, thrownError) {
+            alert(xhr.status + "\n" + xhr.reponseText + "\n" + thrownError + "\n"+ idpegawai);
         }
     })
     

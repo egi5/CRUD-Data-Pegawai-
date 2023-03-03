@@ -67,7 +67,7 @@
                 success: function(response){
                     alert(response.sukses);
 
-                    $('#modaltamah').modal('hide');
+                    $('#modaltambah').modal('hide');
                     datapegawai();
                 },
                 error:function(xhr, ajaxOptions, thrownError) {

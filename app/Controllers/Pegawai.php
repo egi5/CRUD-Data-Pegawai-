@@ -59,9 +59,11 @@ class Pegawai extends BaseController
 
     public function formedit(){
         if($this->request->isAJAX()){
-            $idpegawai = $this->request->getVar('idpegawai');
             
             $pegawai = new ModelPegawai;
+            $idpegawai = $this->request->getVar('idpegawai');
+            
+            
             $row = $pegawai->find($idpegawai);
 
             $data = [
@@ -74,9 +76,24 @@ class Pegawai extends BaseController
             ];
 
             $msg = [
-                'sukses' => view('pegawai/modaledit', $data)
+                'sukses' => view('pegawai/modaledit')
             ];
             echo json_encode($msg);
+        }
+    }
+
+    public function hapus(){
+        if($this->request->isAJAX()){
+            $idpegawai = $this->request->getVar('idpegawai');
+            $pegawai = new ModelPegawai;
+
+            $pegawai->delete($idpegawai);
+
+            $msg = [
+                'sukses' => 'Pegawai dengan ID $idpegawai berhasil dihapus'
+            ];
+            echo json_encode($msg);
+           
         }
     }
 }
