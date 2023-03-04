@@ -9,5 +9,9 @@ class ModelPegawai extends Model{
     protected $primaryKey = 'idpegawai';
 
     protected $allowedFields = ['idpegawai', 'nama_pegawai','jenkel','tanggal_lahir', 'alamat_pegawai', 'telepon'];
+
+    function ambildata($idpegawai){
+        return $this->db->table('pegawai')->getWhere(['idpegawai' => $idpegawai]);
+    }
     
 }

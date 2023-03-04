@@ -11,12 +11,12 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <label for="" class="form-label">ID Pegawai</label>
-                    <input type="text" class="form-control" id="idpegawai" name="idpegawai" value="<?= $idpegawai ?>">
+                    <input type="text" class="form-control" id="idpegawai" name="idpegawai">
                 </div>
 
                 <div class="mb-3">
                     <label for="" class="form-label">Nama Pegawai</label>
-                    <input type="text" class="form-control" id="namapegawai" name="namapegawai" value="<?= $nama_pegawai ?>>
+                    <input type="text" class="form-control" id="namapegawai" name="namapegawai" >
                 </div>
 
                 <div class="mb-3">
@@ -55,6 +55,27 @@
 </div>
 
 <script>
+    $(document).ready(function(){
+        $('.formpegawai').submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                type:"POST",
+                url: $(this).attr('action'),
+                data:$(this).serialize(),
+                dataType:"Json",  
+                success: function(response){
+                    alert(response.sukses);
 
+                    $('#modaledit').modal('hide');
+                    datapegawai();
+                },
+                error:function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" + xhr.reponseText + "\n" + thrownError);
+                }
+
+            });
+            return false;
+        });
+    });
     
 </script>

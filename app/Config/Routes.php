@@ -31,6 +31,9 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Layout::index');
+$routes->get('modeledit/(:any)', 'Pegawai::formedit/$1');
+$routes->get('updatedata/', 'Pegawai::updatedata');
+
 
 /*
  * --------------------------------------------------------------------

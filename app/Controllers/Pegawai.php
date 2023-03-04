@@ -6,6 +6,10 @@ use App\Models\ModelPegawai;
 
 class Pegawai extends BaseController
 {
+    function __construct()
+    {
+        $this->model = new \App\Models\ModelPegawai();
+    }
     public function index()
     {
         
@@ -57,29 +61,40 @@ class Pegawai extends BaseController
         echo json_encode($msg);
     }
 
-    public function formedit(){
-        if($this->request->isAJAX()){
-            
-            $pegawai = new ModelPegawai;
-            $idpegawai = $this->request->getVar('idpegawai');
-            
-            
-            $row = $pegawai->find($idpegawai);
+    public function formedit($idpegawai)
+    {
+        $pegawai= new ModelPegawai();
+        
+        $row = $pegawai->find($idpegawai);
 
-            $data = [
-                'idpegawai' => $row['idpegawai'],
-                'namapegawai' => $row['nama_pegawai'],
-                'jenkel' => $row['jenkel'],
-                'tgllahir' => $row['tanggal_lahir'],
-                'alamat' => $row['alamat'],
-                'telepon' => $row['telepon'],
-            ];
+        $data =[
+            'data' => $row
+        ];
+        
+        return view('pegawai/editform', $data);
+        //  $msg = [
+        //     'sukses' => view('pegawai/modaledit', $data)
+        //     ];
+        // echo json_encode($msg);
+    }
 
-            $msg = [
-                'sukses' => view('pegawai/modaledit')
-            ];
-            echo json_encode($msg);
-        }
+    public function updatedata(){
+        $simpandata =[
+            'nama_pegawai' => $this->request->getVar('namapegawai'),
+            'jenkel' => $this->request->getVar('jenkel'),
+            'tanggal_lahir' => $this->request->getVar('tgllahir'),
+            'alamat_pegawai' => $this->request->getVar('alamat'),
+            'telepon' => $this->request->getVar('telepon')
+        ];
+
+        $pegawai = new ModelPegawai;
+        $idpegawai = $this->request->getVar('idpegawai');
+
+        $pegawai->update($idpegawai, $simpandata);
+        $msg = [
+                'sukses' =>"Data Berhasil diubah silahkan ketikkan url 'localhost:8080/pegawai' dipencarian browser anda"
+        ];
+        echo json_encode($msg);
     }
 
     public function hapus(){

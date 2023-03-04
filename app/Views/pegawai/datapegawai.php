@@ -24,35 +24,32 @@
             <td><?= $row['alamat_pegawai'] ?></td>
             <td><?= $row['telepon'] ?></td>
             <td>
-                <a type = "button" class="btn btn-info btn-sm edit" onclick="edit('<?= $row['idpegawai'] ?>')">Update</a>
                 <a type = "button" class="btn btn-danger btn-sm" onclick="hapus('<?= $row['idpegawai'] ?>')">Delete</a>
-            </td>
+               <a href="formedit/<?= $row['idpegawai']?>"  type = "button" class="btn btn-info btn-sm edit" >Update</a>
+
+            </td> 
         </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
+
 <script>
 $(document).ready(function() {
     $('#datapegawai').DataTable();
 });
 
 
-function edit(idpegawai) {
+function edit(idpegawai) { 
     $.ajax({
-        type:"post",
-        url: "<?= site_url('pegawai/formedit')?>",
-        data:{
-            idpegawai : idpegawai
-        },
-        dataType:"json",  
-        success: function(response){
-            $('#modaledit').modal('show');
-            $('.viewmodal').html(response.sukses).show();    
+        success: function (response) { 
+                $('.viewmodal').html(reponse.sukses).show();
+                $('#modaledit').modal('show');        
+            
         },
         error:function(xhr, ajaxOptions, thrownError) {
             alert(xhr.status + "\n" + xhr.reponseText + "\n" + thrownError + "\n"+ idpegawai);
         }
-    });
+    })
 }
 
 function hapus(idpegawai) {
@@ -65,11 +62,11 @@ function hapus(idpegawai) {
         dataType: "json",
         success: function (response) {
             datapegawai();
+            
         },
         error:function(xhr, ajaxOptions, thrownError) {
             alert(xhr.status + "\n" + xhr.reponseText + "\n" + thrownError + "\n"+ idpegawai);
         }
     })
-    
 }
 </script>

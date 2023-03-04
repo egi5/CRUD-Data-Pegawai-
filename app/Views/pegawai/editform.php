@@ -1,59 +1,58 @@
-<!-- Modal -->
-<div class="modal fade" id="modaltambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data Pegawai</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <?= form_open('pegawai/simpandata',['class' => 'formpegawai']) ?>
-            <div class="modal-body">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+</head>
+<body>
+        <div class="container">
+            <h4>Edit Data</h4>
+            <?= form_open('pegawai/updatedata',['class' => 'formpegawai']) ?>
                 <div class="mb-3">
                     <label for="" class="form-label">ID Pegawai</label>
-                    <input type="text" class="form-control" id="idpegawai" name="idpegawai">
+                    <input type="text" class="form-control" id="idpegawai" name="idpegawai" value="<?= $data['idpegawai']?>">
                 </div>
 
                 <div class="mb-3">
                     <label for="" class="form-label">Nama Pegawai</label>
-                    <input type="text" class="form-control" id="namapegawai" name="namapegawai">
+                    <input type="text" class="form-control" id="namapegawai" name="namapegawai" value="<?= $data['nama_pegawai']?>">
                 </div>
 
                 <div class="mb-3">
                     <label for="" class="form-label">Jenis Kelamin</label>
                     <select name="jenkel" id="jenkel" class="form-control">
                         <option value="">--pilih--</option>
-                        <option value="L">Laki-laki</option>
-                        <option value="P">Perempuan</option>
+                        <option value="L" <?php if($data['jenkel'] == 'L') echo 'selected'?>>Laki-laki</option>
+                        <option value="P" <?php if($data['jenkel'] == 'P') echo 'selected'?>>Perempuan</option>
                     </select>
                 </div>
 
                 <div class="mb-3">
                     <label for="" class="form-label">Tanggal Lahir</label>
-                    <input type="date" class="form-control" id="tgllahir" name="tgllahir">
+                    <input type="date" class="form-control" id="tgllahir" name="tgllahir" value="<?= $data['tanggal_lahir']?>">
                 </div>
 
                 <div class="mb-3">
                     <label for="" class="form-label">Alamat</label>
-                    <input type="text area" class="form-control" id="alamat" name="alamat">
+                    <input type="text area" class="form-control" id="alamat" name="alamat" value="<?= $data['alamat_pegawai']?>">
                 </div>
 
                 <div class="mb-3">
                     <label for="" class="form-label">No Handphone</label>
-                    <input type="text" class="form-control" id="telepon" name="telepon">
+                    <input type="text" class="form-control" id="telepon" name="telepon" value="<?= $data['telepon']?>">
                 </div>
-            </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" id="btnsimpan">Save</button>
-            </div>
-
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="btnsimpan">Update</button>
+                </div>
             <?= form_close() ?>
         </div>
-    </div>
-</div>
-   
+</body>
+</html>
+
 <script>
 
     $(document).ready(function(){
@@ -65,9 +64,8 @@
                 data:$(this).serialize(),
                 dataType:"Json",  
                 success: function(response){
-                    alert(response.sukses);
+                    alert("Data berhasil diupdate");
 
-                    $('#modaltambah').modal('hide');
                     datapegawai();
                 },
                 error:function(xhr, ajaxOptions, thrownError) {
@@ -79,3 +77,4 @@
         });
     });
 </script>
+
